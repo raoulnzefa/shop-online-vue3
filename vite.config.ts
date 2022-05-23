@@ -35,14 +35,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: Number(env.VITE_PORT),
-      proxy: {
-        '/dev-api': {
-          target: 'https://api.it120.cc/xiaochengxu',
-          changeOrigin: true,
-          secure: false,
-          rewrite: (path) => path.replace(/^\/dev-api/, ''),
-        },
-      },
     },
     build: {
       assetsDir: assetsDir,

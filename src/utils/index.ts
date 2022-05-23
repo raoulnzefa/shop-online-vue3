@@ -61,27 +61,20 @@ export function getDevicePlatform(): Record<string, boolean> {
 /**
  * 获取接口前缀
  */
-export function getAPI(code = 'api') {
-  const host: string = import.meta.env.PROD ? import.meta.env.VITE_APP_API_HOST : location.host;
-  const origin = `${location.protocol}//${host}`;
-  const basePath = import.meta.env.PROD ? '/xiaochengxu' : '/dev-api';
-  console.log("API Bashpath= "+ basePath)
-  const api = `${origin}${basePath}`; // 基础接口
-  // const src = `${origin}${process.env.VUE_APP_BASE_API}`;
-
-  switch (code) {
-    case 'host':
-      console.log(" Host BasePath= "+ host)
-      return host;
-    case 'origin':
-      console.log(" Origin BasePath= "+ origin)
-      return origin;
-    // case 'src':
-    //   return src;
-    default:
-      console.log(" API BasePath= "+ api)
-      return api;
+export function getAPI(code: String = 'api') {
+  const host: string = import.meta.env.VITE_APP_API_HOST;
+  if (code == 'host') {
+    return host;
   }
+
+  const origin = `${location.protocol}//${host}`;
+  if (code == 'origin') {
+    return origin;
+  }
+
+  const basePath = import.meta.env.VITE_APP_BASE_URL;
+  const api = `${origin}${basePath}`;
+  return api;
 }
 
 /**

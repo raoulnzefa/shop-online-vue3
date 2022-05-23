@@ -26,12 +26,9 @@ function createRequest<T = ServiceResult>(config: AxiosRequestConfig): Promise<T
     ],
   });
 
-  /**
-   * 请求拦截器
-   */
+  // 向 request 注入一个拦截器
   instance.interceptors.request.use((config: AxiosRequestConfig) => {
-    // store.getters.token && (config.headers.token = store.getters.token);
-
+    // 如果是GET，加入用户的 Token.
     if (config.method === 'get') {
       const userStore = useUserStoreWithOut();
       config.params = { ...config.params, token: userStore.getToken };
@@ -40,9 +37,7 @@ function createRequest<T = ServiceResult>(config: AxiosRequestConfig): Promise<T
     return config;
   });
 
-  /**
-   * 响应拦截器
-   */
+  // 向 Response 注入一个拦截器
   instance.interceptors.response.use(
     (response: AxiosResponse<any>) => {
       const result: ServiceResult = response.data;
@@ -50,13 +45,14 @@ function createRequest<T = ServiceResult>(config: AxiosRequestConfig): Promise<T
 
       if (Number(code) === 0) {
         return result;
-      } else if (Number(code) === 700) {
+      } 
+      if (Number(code) === 700) {
         result.data = null;
         return result;
-      } else {
-        serviceErrorHandel(result);
-        return Promise.reject(result);
       }
+      serviceErrorHandel(result);
+      return Promise.reject(result);
+
     },
     (error: AxiosError) => {
       httpErrorHandle(error);
@@ -101,8 +97,6 @@ function serviceErrorHandel(res: ServiceResult) {
  * HTTP 错误
  */
 function httpErrorHandle(error: AxiosError) {
-  // console.log('[httpErrorHandle]', error);
-  // console.log('[httpErrorHandle]', error.toString());
 
   let msg = '';
 

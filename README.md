@@ -2,12 +2,9 @@
 
 ## 🌈 简介
 
-v-shop 是一个前端免费开源的企业级 H5 商城，也可用于学习参考。
+bookstore 是一个前端免费开源的企业级 H5 商城，也可用于学习参考。
 
 ## 🔥 预览
-
-- :tada: v2 [Vue 2 + Vue CLI 4.5](https://v-shop.shuzp.top/v2/)
-- :rocket: v3 [Vue 3 + Vite 2](https://v-shop.shuzp.top/)
 
 ## 🛠️ 产品
 
