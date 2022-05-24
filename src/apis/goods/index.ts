@@ -257,7 +257,6 @@ export function goodsLimitation(data?: Recordable) {
  * 商品列表
  */
 export function goodsList(data?: Recordable) {
-  console.log(data);
   return defRequest({
     url: `/goods/list`,
     method: 'post',

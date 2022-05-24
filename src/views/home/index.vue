@@ -58,7 +58,6 @@ function onPage() {
 
   API_GOODS.goodsList(params)
     .then((res) => {
-      console.log(res);
       const records = res.data?.result ?? [];
       const total = res.data?.totalRow ?? 0;
 

@@ -41,14 +41,13 @@ export const useUserStore = defineStore({
 
       try {
         const loginProvider = loginProviderType[provider];
-
         const res = await API_USER[loginProvider.apiName](params);
         const { token } = res.data;
-
         this.token = token;
         storage.set('token', token);
         return res.data;
       } catch (error) {
+        console.log('login error');
         return Promise.reject(error);
       }
     },

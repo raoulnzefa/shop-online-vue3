@@ -45,14 +45,13 @@ function createRequest<T = ServiceResult>(config: AxiosRequestConfig): Promise<T
 
       if (Number(code) === 0) {
         return result;
-      } 
+      }
       if (Number(code) === 700) {
         result.data = null;
         return result;
       }
       serviceErrorHandel(result);
       return Promise.reject(result);
-
     },
     (error: AxiosError) => {
       httpErrorHandle(error);
@@ -97,7 +96,6 @@ function serviceErrorHandel(res: ServiceResult) {
  * HTTP 错误
  */
 function httpErrorHandle(error: AxiosError) {
-
   let msg = '';
 
   if (error?.response) {
