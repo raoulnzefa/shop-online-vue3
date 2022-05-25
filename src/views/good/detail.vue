@@ -59,9 +59,9 @@ const goodDeliveryTitle = computed(() => {
 
 function getGoodsDetail() {
   API_GOODS.goodsDetail({ id: route.query.id }).then((res) => {
+    basicInfo.value = res.data;
     picList.value = res.data?.pics ?? {};
-    basicInfo.value = res.data?.basicInfo;
-    logistics.value = res.data?.logistics ?? {};
+    logistics.value = basicInfo.value.logistics ?? {};
     content.value = res.data?.content;
     // 商品已下架
     if (unref(basicInfo).status === 1) {
@@ -82,8 +82,7 @@ function getGoodsDetail() {
     }
 
     document.title = unref(basicInfo).name;
-
-    getSkuData(res.data.basicInfo, res.data?.properties ?? [], res.data?.skuList ?? []);
+    getSkuData(res.data, res.data?.properties ?? [], res.data?.skuList ?? []);
     getAfterService();
     // TODO 商品收藏
   });
@@ -183,6 +182,7 @@ function getAfterService() {
 // 购物车
 const cartCount = ref<number | undefined>(undefined);
 function getCartCount() {
+  console.log('^^^^^^getCartCount 还没有实现购物车功能。');
   API_CART.shoppingCartInfo().then((res) => {
     cartCount.value = res.data?.number as number;
   });
@@ -202,7 +202,6 @@ function addCartHandle() {
       })),
     );
   }
-
   API_CART.shoppingCartAdd(params)
     .then(() => {
       Toast('已成功加入购物车');
