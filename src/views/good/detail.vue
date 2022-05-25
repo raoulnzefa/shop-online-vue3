@@ -59,11 +59,10 @@ const goodDeliveryTitle = computed(() => {
 
 function getGoodsDetail() {
   API_GOODS.goodsDetail({ id: route.query.id }).then((res) => {
-    picList.value = res.data.pics;
-    basicInfo.value = res.data.basicInfo;
+    picList.value = res.data?.pics ?? {};
+    basicInfo.value = res.data?.basicInfo;
     logistics.value = res.data?.logistics ?? {};
-    content.value = res.data.content;
-
+    content.value = res.data?.content;
     // 商品已下架
     if (unref(basicInfo).status === 1) {
       Toast(unref(basicInfo).statusStr);
@@ -265,7 +264,9 @@ function addCartHandle() {
     <van-cell v-if="hasSku" :border="false" is-link @click="onSkuShow">
       <template #title>
         <div class="cell-bar">
-          <div class="cell-bar-title">{{ initialSku.selectedPropList.length ? '已选' : '选择' }}</div>
+          <div class="cell-bar-title">
+            {{ initialSku.selectedPropList.length ? '已选' : '选择' }}
+          </div>
           <div class="cell-bar-text">{{ goodSelectedSkuTitle }}</div>
         </div>
       </template>
