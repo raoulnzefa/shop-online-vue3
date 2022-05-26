@@ -28,7 +28,7 @@ onMounted(() => {
 const route = useRoute();
 const router = useRouter();
 const orderStore = useOrderStore();
-const { hasLogin } = usePage();
+const { hasLogin, token } = usePage();
 
 const picList = ref<Recordable[]>([]);
 const basicInfo = ref<Recordable>({});
@@ -133,6 +133,7 @@ const onSkuConfirm = useThrottleFn(
     if (unref(skuNextActionType) === 'addCart') {
       addCartHandle();
     } else {
+      console.log('^^^^^^buy directly');
       orderStore.setTradeGoods({
         origin: 'buy',
         list: [
@@ -189,9 +190,12 @@ function getCartCount() {
 }
 
 function addCartHandle() {
+  console.log('^^^^^^addCartHandle');
+
   const params: shoppingCartAddParams = {
     goodsId: unref(sku).goodsId,
     number: unref(initialSku).selectedNum,
+    token: unref(token),
   };
 
   if (unref(initialSku).selectedPropList.length) {

@@ -6,6 +6,8 @@ import { shoppingCartAddParams, shoppingCartResult } from './typings';
  * 加入购物车
  */
 export function shoppingCartAdd(data: shoppingCartAddParams) {
+  console.log('^^^^^^^shoppingCartAdd');
+  console.log(data);
   return defRequest<ServiceResult<shoppingCartResult>>({
     url: `/shopping-cart/add`,
     method: 'post',

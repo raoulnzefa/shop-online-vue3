@@ -1,4 +1,5 @@
 export interface shoppingCartAddParams {
+  token: string;
   goodsId: number;
   number: number;
   addition?: string;
