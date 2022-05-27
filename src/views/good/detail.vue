@@ -14,6 +14,7 @@ import { decimalFormat, priceIntegerFormat } from '@/utils/format';
 import { getAfterSaleTitle } from '@/model/modules/order/afterSale';
 
 import { useOrderStore } from '@/store/modules/order';
+import { useUserStoreWithOut } from '@/store/modules/user';
 import { useThrottleFn } from '@vueuse/core';
 import { usePage } from '@/hooks/shared/usePage';
 
@@ -28,6 +29,7 @@ onMounted(() => {
 const route = useRoute();
 const router = useRouter();
 const orderStore = useOrderStore();
+const userStore = useUserStoreWithOut();
 const { hasLogin, token } = usePage();
 
 const picList = ref<Recordable[]>([]);
@@ -185,6 +187,7 @@ const cartCount = ref<number | undefined>(undefined);
 function getCartCount() {
   console.log('^^^^^^getCartCount 还没有实现购物车功能。');
   API_CART.shoppingCartInfo().then((res) => {
+    console.log(res.data)
     cartCount.value = res.data?.number as number;
   });
 }

@@ -22,7 +22,7 @@ onMounted(() => {
 });
 
 const orderStore = useOrderStore();
-const { hasLogin, goHome, goLogin } = usePage();
+const { hasLogin, goHome, goLogin, token } = usePage();
 
 const editStatus = ref(1); // 编辑, 取消
 function onEditStatusChange() {
@@ -65,8 +65,9 @@ const selectedAll = computed({
 function getList() {
   listLoading.value = true;
 
-  API_CART.shoppingCartInfo()
+  API_CART.shoppingCartInfo({token})
     .then((res) => {
+      console.log(res.data)
       list.value = res.data?.items ?? [];
     })
     .finally(() => {
@@ -113,7 +114,7 @@ function cartNumberHandle(_index: number, { key, number }) {
     duration: 0,
   });
 
-  API_CART.shoppingCartModifyNumber({ number, key })
+  API_CART.shoppingCartModifyNumber({token, number, key })
     .then((res) => {
       Toast.clear();
       list.value = res.data?.items ?? [];
