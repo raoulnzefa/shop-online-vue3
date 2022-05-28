@@ -20,7 +20,6 @@ function createRequest<T = ServiceResult>(config: AxiosRequestConfig): Promise<T
           return data;
         } else {
           const userStore = useUserStoreWithOut();
-          console.log("User Token from userStor :"+userStore.getToken)
           return qs.stringify({ ...data, token: userStore.getToken }); // 序列化请求参数
         }
       },

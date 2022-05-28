@@ -59,6 +59,7 @@ export function userLoginOut(data?: Recordable) {
  * 绑定手机号码
  */
 export function userMBindMobile(data?: Recordable) {
+  console.log(data)
   return defRequest({
     url: `/user/m/bind-mobile`,
     method: 'post',
@@ -81,6 +82,7 @@ export function userMLogin(data?: Recordable) {
  * 使用手机号码和验证码登录
  */
 export function userMLoginMobile(data?: Recordable) {
+  console.log(data)
   return defRequest({
     url: `/user/m/loginMobile`,
     method: 'post',
@@ -92,6 +94,8 @@ export function userMLoginMobile(data?: Recordable) {
  * 用户注册[手机号]
  */
 export function userMRegister(data?: Recordable) {
+  console.log("~~~~userMRegister~~~")
+  console.log(data)
   return defRequest({
     url: `/user/m/register`,
     method: 'post',

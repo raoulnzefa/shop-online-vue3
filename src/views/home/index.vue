@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { onMounted, ref, unref } from 'vue';
-import { useRouter } from 'vue-router';
-import API_GOODS from '@/apis/goods';
-import API_BANNER from '@/apis/banner';
-import Tabbar from '@/components/Tabbar/index.vue';
-import Plate from '@/components/Plate/index.vue';
-import IMAGE_LIST_EMPTY from '@/assets/images/empty/good.png';
+import { onMounted, ref, unref } from "vue";
+import { useRouter } from "vue-router";
+import API_GOODS from "@/apis/goods";
+import API_BANNER from "@/apis/banner";
+import Tabbar from "@/components/Tabbar/index.vue";
+import Plate from "@/components/Plate/index.vue";
+import IMAGE_LIST_EMPTY from "@/assets/images/empty/good.png";
 
 onMounted(() => {
   getBannerList();
@@ -17,7 +17,7 @@ const router = useRouter();
 const bannerList = ref<Recordable[]>([]);
 
 function getBannerList() {
-  API_BANNER.bannerList({ type: 'indexBanner' }).then((res) => {
+  API_BANNER.bannerList({ type: "indexBanner" }).then((res) => {
     bannerList.value = res.data || [];
   });
 }
@@ -32,9 +32,9 @@ const list = ref<Recordable[]>([]);
 const listLoading = ref(false);
 const listFinished = ref(false);
 const listError = ref(false);
-const listFinishedText = ref('没有更多了');
-const listErrorText = ref('请求失败，点击重新加载');
-const listEmptyText = ref('暂无商品');
+const listFinishedText = ref("没有更多了");
+const listErrorText = ref("请求失败，点击重新加载");
+const listEmptyText = ref("暂无商品");
 const listEmptyImage = IMAGE_LIST_EMPTY;
 const pageCurrent = ref(1);
 const pageSize = ref(10);
@@ -73,7 +73,7 @@ function onPage() {
 }
 
 function onGoodClicked(id: number) {
-  router.push({ path: '/good/detail', query: { id } });
+  router.push({ path: "/good/detail", query: { id } });
 }
 </script>
 
@@ -87,7 +87,12 @@ function onGoodClicked(id: number) {
           class="swiper-item"
           @click="onBannerClicked(item.linkUrl)"
         >
-          <van-image class="swiper-item-img" fit="cover" :src="item.picUrl" :alt="item.title" />
+          <van-image
+            class="swiper-item-img"
+            fit="cover"
+            :src="item.picUrl"
+            :alt="item.title"
+          />
         </van-swipe-item>
       </van-swipe>
     </div>
