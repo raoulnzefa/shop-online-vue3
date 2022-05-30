@@ -185,7 +185,6 @@ function getAfterService() {
 // 购物车
 const cartCount = ref<number | undefined>(undefined);
 function getCartCount() {
-  console.log('^^^^^^getCartCount 还没有实现购物车功能。');
   API_CART.shoppingCartInfo().then((res) => {
     console.log(res.data)
     cartCount.value = res.data?.number as number;
@@ -193,8 +192,6 @@ function getCartCount() {
 }
 
 function addCartHandle() {
-  console.log('^^^^^^addCartHandle');
-
   const params: shoppingCartAddParams = {
     goodsId: unref(sku).goodsId,
     number: unref(initialSku).selectedNum,

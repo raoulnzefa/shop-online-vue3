@@ -38,7 +38,7 @@ export const useUserStore = defineStore({
   actions: {
     async login(payload: Recordable = {}) {
       const { provider = 'system', params } = payload;
-
+      console.log(params)
       try {
         const loginProvider = loginProviderType[provider];
         const res = await API_USER[loginProvider.apiName](params);
@@ -47,7 +47,6 @@ export const useUserStore = defineStore({
         storage.set('token', token);
         return res.data;
       } catch (error) {
-        console.log('login error');
         return Promise.reject(error);
       }
     },
@@ -56,7 +55,7 @@ export const useUserStore = defineStore({
 
       if (this.getToken) {
         try {
-          await API_USER.userLoginOut();
+          await API_USER.userLogOut();
         } catch (error) {
           console.error('退出登录失败', error);
         }

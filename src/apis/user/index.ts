@@ -47,9 +47,9 @@ export function userModify(data?: Recordable) {
 /**
  * 退出登录
  */
-export function userLoginOut(data?: Recordable) {
+export function userLogOut(data?: Recordable) {
   return defRequest({
-    url: `/user/loginout`,
+    url: `/user/logout`,
     method: 'get',
     params: data,
   });
@@ -197,7 +197,7 @@ export default {
   userDetail,
   userModify,
   // 登录/注册
-  userLoginOut,
+  userLogOut,
   userMBindMobile,
   userMLogin,
   userMLoginMobile,
