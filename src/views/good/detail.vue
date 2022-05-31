@@ -52,7 +52,7 @@ const goodMaxPrice = computed(() => {
 });
 
 const goodDeliveryTitle = computed(() => {
-  if (unref(basicInfo). ) {
+  if (unref(basicInfo).logisticsId ) {
     return `运费 ${unref(logistics).isFree ? "包邮" : "不包邮"}`;
   } else {
     return `无需配送`;
