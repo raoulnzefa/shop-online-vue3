@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, unref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { Dialog, Toast } from 'vant';
-import API_GOODS from '@/apis/goods';
-import API_CART from '@/apis/cart';
-import { shoppingCartAddParams } from '@/apis/cart/typings';
-import Plate from '@/components/Plate/index.vue';
-import Sku from '@/components/Sku/index.vue';
-import { ISku, IInitialSku } from '@/components/Sku/typings';
-import Coupons from './components/Coupons.vue';
-import Reputations from './components/Reputations.vue';
-import { decimalFormat, priceIntegerFormat } from '@/utils/format';
-import { getAfterSaleTitle } from '@/model/modules/order/afterSale';
+import { computed, onMounted, ref, unref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { Dialog, Toast } from "vant";
+import API_GOODS from "@/apis/goods";
+import API_CART from "@/apis/cart";
+import { shoppingCartAddParams } from "@/apis/cart/typings";
+import Plate from "@/components/Plate/index.vue";
+import Sku from "@/components/Sku/index.vue";
+import { ISku, IInitialSku } from "@/components/Sku/typings";
+import Coupons from "./components/Coupons.vue";
+import Reputations from "./components/Reputations.vue";
+import { decimalFormat, priceIntegerFormat } from "@/utils/format";
+import { getAfterSaleTitle } from "@/model/modules/order/afterSale";
 
-import { useOrderStore } from '@/store/modules/order';
-import { useUserStoreWithOut } from '@/store/modules/user';
-import { useThrottleFn } from '@vueuse/core';
-import { usePage } from '@/hooks/shared/usePage';
+import { useOrderStore } from "@/store/modules/order";
+import { useUserStoreWithOut } from "@/store/modules/user";
+import { useThrottleFn } from "@vueuse/core";
+import { usePage } from "@/hooks/shared/usePage";
 
 onMounted(() => {
   getGoodsDetail();
@@ -35,7 +35,7 @@ const { hasLogin, token } = usePage();
 const picList = ref<Recordable[]>([]);
 const basicInfo = ref<Recordable>({});
 const logistics = ref<Recordable>({});
-const content = ref('');
+const content = ref("");
 const goodPrice = computed(() => {
   if (unref(hasSku)) {
     return unref(sku).skuList[0].price;
@@ -47,13 +47,13 @@ const goodMaxPrice = computed(() => {
   if (unref(hasSku)) {
     return unref(sku).skuList[unref(sku).skuList.length - 1].price;
   } else {
-    return '';
+    return "";
   }
 });
 
 const goodDeliveryTitle = computed(() => {
-  if (unref(basicInfo).logisticsId) {
-    return `运费 ${unref(logistics).isFree ? '包邮' : '不包邮'}`;
+  if (unref(basicInfo). ) {
+    return `运费 ${unref(logistics).isFree ? "包邮" : "不包邮"}`;
   } else {
     return `无需配送`;
   }
@@ -73,12 +73,12 @@ function getGoodsDetail() {
     // 商品库存为0
     if (unref(basicInfo).stores === 0) {
       Dialog.confirm({
-        title: '提示',
-        message: '该商品已售罄,去看看其他商品吧！',
+        title: "提示",
+        message: "该商品已售罄,去看看其他商品吧！",
         showCancelButton: false,
       }).then(() => {
         // on confirm
-        router.replace({ path: '/home' });
+        router.replace({ path: "/home" });
       });
       return;
     }
@@ -91,7 +91,7 @@ function getGoodsDetail() {
 }
 
 // Sku
-const skuNextActionType = ref('goBuy');
+const skuNextActionType = ref("goBuy");
 const skuShow = ref(false);
 const sku = ref<ISku>({
   goodsId: 0,
@@ -115,12 +115,15 @@ const hasSku = computed(() => !!unref(sku).skuList.length);
 const goodSelectedSkuTitle = computed(() => {
   if (unref(hasSku)) {
     if (unref(initialSku).selectedPropList.length) {
-      return unref(initialSku).selectedPropList.reduce((acc, cur) => `${acc} ${cur.childName}`, '');
+      return unref(initialSku).selectedPropList.reduce(
+        (acc, cur) => `${acc} ${cur.childName}`,
+        ""
+      );
     } else {
-      return unref(sku).propList.reduce((acc, cur) => `${acc} ${cur.name}`, '');
+      return unref(sku).propList.reduce((acc, cur) => `${acc} ${cur.name}`, "");
     }
   } else {
-    return '';
+    return "";
   }
 });
 
@@ -132,12 +135,11 @@ function onSkuShow(type: string) {
 const onSkuConfirm = useThrottleFn(
   (data) => {
     skuShow.value = false;
-    if (unref(skuNextActionType) === 'addCart') {
+    if (unref(skuNextActionType) === "addCart") {
       addCartHandle();
     } else {
-      console.log('^^^^^^buy directly');
       orderStore.setTradeGoods({
-        origin: 'buy',
+        origin: "buy",
         list: [
           {
             goodsId: unref(sku).goodsId,
@@ -153,10 +155,14 @@ const onSkuConfirm = useThrottleFn(
     }
   },
   1000,
-  false,
+  false
 );
 
-function getSkuData(basicInfo: Recordable, properties: Recordable[], skuList: Recordable[]) {
+function getSkuData(
+  basicInfo: Recordable,
+  properties: Recordable[],
+  skuList: Recordable[]
+) {
   sku.value = {
     goodsId: basicInfo.id,
     stock: basicInfo.stores,
@@ -173,11 +179,11 @@ function getSkuData(basicInfo: Recordable, properties: Recordable[], skuList: Re
 }
 
 function onConcatService() {
-  Toast('未开放：客服');
+  Toast("未开放：客服");
 }
 
 // 售后服务
-const afterSaleTitle = ref('');
+const afterSaleTitle = ref("");
 function getAfterService() {
   afterSaleTitle.value = getAfterSaleTitle(unref(basicInfo).afterSale);
 }
@@ -186,7 +192,6 @@ function getAfterService() {
 const cartCount = ref<number | undefined>(undefined);
 function getCartCount() {
   API_CART.shoppingCartInfo().then((res) => {
-    console.log(res.data)
     cartCount.value = res.data?.number as number;
   });
 }
@@ -203,12 +208,12 @@ function addCartHandle() {
       unref(initialSku).selectedPropList.map((v: Recordable) => ({
         optionId: v.id,
         optionValueId: v.childId,
-      })),
+      }))
     );
   }
   API_CART.shoppingCartAdd(params)
     .then(() => {
-      Toast('已成功加入购物车');
+      Toast("已成功加入购物车");
       getCartCount();
     })
     .catch((error) => {
@@ -229,13 +234,17 @@ function addCartHandle() {
         <div class="price-hd">
           <div class="price-current">
             <span class="price-current-symbol">¥</span>
-            <span class="price-current-integer">{{ priceIntegerFormat(goodPrice, goodMaxPrice) }}</span>
+            <span class="price-current-integer">{{
+              priceIntegerFormat(goodPrice, goodMaxPrice)
+            }}</span>
             <!-- <span v-if="marketing.type" class="price-tag">{{ marketing.info.label }}</span> -->
           </div>
           <div v-if="basicInfo.originalPrice > 0" class="price-origin">
             <span class="price-origin-label">价格</span>
             <span class="price-origin-symbol">¥</span>
-            <span class="price-origin-integer">{{ decimalFormat(basicInfo.originalPrice) }}</span>
+            <span class="price-origin-integer">{{
+              decimalFormat(basicInfo.originalPrice)
+            }}</span>
           </div>
         </div>
       </div>
@@ -268,7 +277,7 @@ function addCartHandle() {
       <template #title>
         <div class="cell-bar">
           <div class="cell-bar-title">
-            {{ initialSku.selectedPropList.length ? '已选' : '选择' }}
+            {{ initialSku.selectedPropList.length ? "已选" : "选择" }}
           </div>
           <div class="cell-bar-text">{{ goodSelectedSkuTitle }}</div>
         </div>
@@ -282,12 +291,27 @@ function addCartHandle() {
     <van-action-bar>
       <van-action-bar-icon icon="thumb-circle-o" text="首页" to="/home" replace />
       <van-action-bar-icon icon="chat-o" text="客服" @click="onConcatService" />
-      <van-action-bar-icon icon="cart-o" text="购物车" to="/cart" :badge="cartCount" replace />
-      <van-action-bar-button type="warning" text="加入购物车" @click="onSkuShow('addCart')" />
+      <van-action-bar-icon
+        icon="cart-o"
+        text="购物车"
+        to="/cart"
+        :badge="cartCount"
+        replace
+      />
+      <van-action-bar-button
+        type="warning"
+        text="加入购物车"
+        @click="onSkuShow('addCart')"
+      />
       <van-action-bar-button type="danger" text="立即购买" @click="onSkuShow" />
     </van-action-bar>
     <!-- SKU 弹窗 -->
-    <Sku v-model:show="skuShow" :sku="sku" :initial-sku="initialSku" @confirm="onSkuConfirm" />
+    <Sku
+      v-model:show="skuShow"
+      :sku="sku"
+      :initial-sku="initialSku"
+      @confirm="onSkuConfirm"
+    />
   </div>
 </template>
 

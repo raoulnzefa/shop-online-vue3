@@ -302,7 +302,7 @@ export function goodsRebate(data?: Recordable) {
  */
 export function goodsReputation(data?: Recordable) {
   return defRequest({
-    url: `/shop/goods/reputation/v2`,
+    url: `/shop/goods/reputation`,
     method: 'post',
     data,
   });

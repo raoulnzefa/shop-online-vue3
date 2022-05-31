@@ -38,7 +38,6 @@ export const useUserStore = defineStore({
   actions: {
     async login(payload: Recordable = {}) {
       const { provider = 'system', params } = payload;
-      console.log(params)
       try {
         const loginProvider = loginProviderType[provider];
         const res = await API_USER[loginProvider.apiName](params);

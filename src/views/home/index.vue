@@ -60,7 +60,6 @@ function onPage() {
     .then((res) => {
       const records = res.data?.result ?? [];
       const total = res.data?.totalRow ?? 0;
-
       list.value = unref(pageCurrent) === 1 ? records : unref(list).concat(records);
       listLoading.value = false;
       listFinished.value = list.value.length >= total;

@@ -67,7 +67,6 @@ function getList() {
 
   API_CART.shoppingCartInfo({token})
     .then((res) => {
-      console.log(res.data)
       list.value = res.data?.items ?? [];
     })
     .finally(() => {
