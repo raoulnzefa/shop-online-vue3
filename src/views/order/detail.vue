@@ -99,7 +99,8 @@ function onOrderDelivery(orderId: number) {
     });
 }
 
-function onGoodClicked(id: number) {
+function onGoodClicked(id: string) {
+  console.log("~~~ ask goods detail for id =" +id)
   router.push({
     path: '/good/detail',
     query: {

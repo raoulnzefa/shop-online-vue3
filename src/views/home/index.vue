@@ -71,7 +71,7 @@ function onPage() {
     });
 }
 
-function onGoodClicked(id: number) {
+function onGoodClicked(id: string) {
   router.push({ path: "/good/detail", query: { id } });
 }
 </script>

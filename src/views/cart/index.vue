@@ -64,7 +64,6 @@ const selectedAll = computed({
 
 function getList() {
   listLoading.value = true;
-
   API_CART.shoppingCartInfo({token})
     .then((res) => {
       list.value = res.data?.items ?? [];

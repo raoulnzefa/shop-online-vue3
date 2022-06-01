@@ -191,7 +191,7 @@ function getAfterService() {
 // 购物车
 const cartCount = ref<number | undefined>(undefined);
 function getCartCount() {
-  API_CART.shoppingCartInfo().then((res) => {
+  API_CART.shoppingCartInfo({token}).then((res) => {
     cartCount.value = res.data?.number as number;
   });
 }
