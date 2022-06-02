@@ -1,20 +1,18 @@
-# v-shop
+# Shopping Online
 
 ## 🌈 简介
 
-bookstore 是一个前端免费开源的企业级 H5 商城，也可用于学习参考。
+Shoping On Line 是一个前端免费开源的企业级 H5 商城，也可用于学习参考。
 
 ## 🔥 预览
 
 ## 🛠️ 产品
 
-- 版本：v3
+- 版本：v0.3 (https://github.com/qiaoliang/shop-online-vue3/releases/tag/v0.3)
 - 前端：vueJs + Vant
-- 后端：[api 工厂](https://www.it120.cc/)
+- 后端：[shopping OnLine in Golang](https://github.com/qiaoliang/shop-online-go/releases/tag/v0.3)
 - 运行平台：移动端 H5
 - 设计稿画布尺寸：375x667
-- 设计稿图片管理: [《v-shop UI —— 语雀》](https://www.yuque.com/vshop/)
-- 商品模拟数据源： [小米商城](https://m.mi.com/)
 - 功能清单
 
   ```
@@ -36,19 +34,16 @@ bookstore 是一个前端免费开源的企业级 H5 商城，也可用于学习
 
 ## 🔨 使用
 
-> Node.js 版本最好 `12.x` 以上，偶数版本 `14.x`，`16.x`
+> Node.js 版本最好 `16.x` 以上
 
 获取项目代码
 
 ```bash
 # 通过 github 拉取
-git clone https://github.com/JoeshuTT/v-shop.git
-
-# 或者 gitee（国内）
-git clone https://gitee.com/Joeshu/v-shop.git
+git clone https://github.com/qiaoliang/shop-online-vue3
 
 # 进入项目目录
-cd v-shop
+cd shop-online-vue3
 ```
 
 安装依赖
@@ -72,6 +67,4 @@ pnpm run build
 
 ## ⭐ 作者
 
-如果觉得项目不错，或者有帮助到你，希望你可以去 Github 或者 Gitee 帮我点个 ⭐ Star，这将是对我极大的鼓励与支持。
-
-微信： f144270（请备注 v-shop）
+如果觉得项目不错，或者有帮助到你，希望你可以去 Github 帮我点个 ⭐ Star，这将是对我极大的鼓励与支持。
